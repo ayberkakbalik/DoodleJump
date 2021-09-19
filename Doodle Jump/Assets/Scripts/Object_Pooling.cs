@@ -13,10 +13,14 @@ public class Object_Pooling : MonoBehaviour
         float randomX = Random.Range(minX_platform_spawn_position, maxX_platform_spawn_position);
         float randomY = Random.Range(minY_platform_spawn_position, maxY_platform_spawn_position);
 
-       if (contact.tag == "Platform")  // Temas edilen objenin tagi Platform ise
+       if (contact.tag == "Platform" || contact.tag == "JumpingPlatform")  // Temas edilen objenin tagi Platform veya Jumping Platform ise
         {
             contact.transform.position = new Vector3(randomX, contact.transform.position.y + randomY, contact.transform.position.z);
         }
+       /*if (contact.tag == "JumpingPlatform") // Temas edilen objenin tagi JumpingPlatform ise
+       {
+            contact.transform.position = new Vector3(randomX, contact.transform.position.y + randomY, contact.transform.position.z);
+       }*/
     }
 
 }

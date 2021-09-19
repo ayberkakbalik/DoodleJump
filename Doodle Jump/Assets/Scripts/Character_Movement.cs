@@ -11,7 +11,8 @@ public class Character_Movement : MonoBehaviour
     public float speed = 10f;  // X axis için
     public float movementInput = 0f;
 
-    public float jumpPower = 8f;
+    public float jumpPower = 8f;  
+    public float jumpPowerHelicalSpring = 16f;  // Yaylý Platforma dokununca zýplama gücü
     Vector2 velocity;
 
     public TextMeshProUGUI scoreText; // Skor texti için
@@ -68,11 +69,27 @@ public class Character_Movement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D platform)
     {
+        /* if (doodle.velocity.y <= 0.1f)
+         {
+             velocity = doodle.velocity;
+             velocity.y = jumpPower;
+             doodle.velocity = velocity;
+
+         }*/
         if (doodle.velocity.y <= 0.1f)
         {
-            velocity = doodle.velocity;
-            velocity.y = jumpPower;
-            doodle.velocity = velocity;
+            if(platform.collider.tag == "Platform")
+            {
+                velocity = doodle.velocity;
+                velocity.y = jumpPower;
+                doodle.velocity = velocity;
+            }
+            if (platform.collider.tag == "JumpingPlatform")
+            {
+                velocity = doodle.velocity;
+                velocity.y = jumpPowerHelicalSpring;
+                doodle.velocity = velocity;
+            }
 
         }
 

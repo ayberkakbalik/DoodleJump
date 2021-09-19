@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - End
+  - JumpingPlatform
   layers:
   - Default
   - TransparentFX
