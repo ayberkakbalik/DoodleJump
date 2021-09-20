@@ -13,14 +13,16 @@ public class Character_Movement : MonoBehaviour
 
     public float jumpPower = 8f;  
     public float jumpPowerHelicalSpring = 16f;  // Yaylý Platforma dokununca zýplama gücü
+    public float jumpPowerEnemyAlien = 16f;
+
     Vector2 velocity;
     
     /*public TextMeshProUGUI scoreText; // Skor texti için
     int score = 0;                                               //Score text ikinci yapýþým
     float floatScore = 0f;*/
 
-    public AudioSource jumpingSoundEffect;     //Sound Effects
-    public AudioSource jumpingHelicalSpringSoundEffect;
+    public AudioSource jumpingEffectAudioSource;     //Sound Effects
+    public AudioSource jumpingHelicalSpringEffectAudioSource;
 
     Vector2 screenTopRightCornerWorldPosition;
     Vector2 screenTopLeftCornerWorldPosition;
@@ -85,18 +87,17 @@ public class Character_Movement : MonoBehaviour
                 velocity = doodle.velocity;
                 velocity.y = jumpPower;
                 doodle.velocity = velocity;
-                jumpingSoundEffect.Play();
+                jumpingEffectAudioSource.Play();
                 
             }
-            if (platform.collider.tag == "JumpingPlatform")
+            if (platform.collider.tag == "JumpingPlatform" || platform.collider.tag == "EnemyAlien")
             {
                 velocity = doodle.velocity;
                 velocity.y = jumpPowerHelicalSpring;
                 doodle.velocity = velocity;
-                jumpingHelicalSpringSoundEffect.Play();
+                jumpingHelicalSpringEffectAudioSource.Play();
              
             }
-
         }
 
         if (platform.gameObject.tag == "End")  // Yanma
