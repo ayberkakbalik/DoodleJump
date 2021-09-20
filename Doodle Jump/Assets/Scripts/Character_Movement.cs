@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+//using TMPro;
 using UnityEngine.SceneManagement;
 
 public class Character_Movement : MonoBehaviour
@@ -14,11 +14,13 @@ public class Character_Movement : MonoBehaviour
     public float jumpPower = 8f;  
     public float jumpPowerHelicalSpring = 16f;  // Yaylý Platforma dokununca zýplama gücü
     Vector2 velocity;
+    
+    /*public TextMeshProUGUI scoreText; // Skor texti için
+    int score = 0;                                               //Score text ikinci yapýþým
+    float floatScore = 0f;*/
 
-    public TextMeshProUGUI scoreText; // Skor texti için
-    int score;
-
-  
+    public AudioSource jumpingSoundEffect;     //Sound Effects
+    public AudioSource jumpingHelicalSpringSoundEffect;
 
     Vector2 screenTopRightCornerWorldPosition;
     Vector2 screenTopLeftCornerWorldPosition;
@@ -69,7 +71,7 @@ public class Character_Movement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D platform)
     {
-        /* if (doodle.velocity.y <= 0.1f)
+        /* if (doodle.velocity.y <= 0.1f)         //ÝLK ÖNCE BÖYLE YAPMIÞTIM
          {
              velocity = doodle.velocity;
              velocity.y = jumpPower;
@@ -83,27 +85,40 @@ public class Character_Movement : MonoBehaviour
                 velocity = doodle.velocity;
                 velocity.y = jumpPower;
                 doodle.velocity = velocity;
+                jumpingSoundEffect.Play();
+                
             }
             if (platform.collider.tag == "JumpingPlatform")
             {
                 velocity = doodle.velocity;
                 velocity.y = jumpPowerHelicalSpring;
                 doodle.velocity = velocity;
+                jumpingHelicalSpringSoundEffect.Play();
+             
             }
 
         }
 
         if (platform.gameObject.tag == "End")  // Yanma
         {
-            SceneManager.LoadScene(0);
+            
+            SceneManager.LoadScene(DoodleJumpConstants.LAST_MENU_NAME);
+            //SceneManager.LoadScene(DoodleJumpConstants.MAIN_MENU_NAME);  3. YAPTIÐIM SON
+
             //Time.timeScale = 0f;  // Zamaný durdur   ***** BUNU KARAKTERÝ GÖRÜNMEZ YAPARAK DEÐÝÞTÝR!!!!
+            //SceneManager.LoadScene(0);    2. olarak bunu yapmýþtým
         }
 
-        if (platform.gameObject.tag == "Platform")
+        /*if (platform.gameObject.tag == "Platform")
         {
             score += Random.Range(10, 50);
-            scoreText.text = "Score: " + score;   // For score text
-        }
+            scoreText.text = "Score: " + score;   // FOR SCORE TEX    - ÝLK YAPIÞIM
+
+
+            floatScore = transform.position.y * 10;                    //ÝKÝNCÝ YAPIÞIM         - YENÝ OLAN Camera_Follow'da
+            score = (int)floatScore;
+            scoreText.text = "Score: " + score.ToString();
+        }*/
     }
 
     /*void OnTriggerEnter2D(Collider2D finish)  // Yanma      Ýlk önce böyle denedim ama finish colliderý ile object pooling birbirine temas edip oyun duruyordu.

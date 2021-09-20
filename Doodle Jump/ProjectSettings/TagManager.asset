@@ -7,6 +7,7 @@ TagManager:
   - Platform
   - End
   - JumpingPlatform
+  - EnemyAlien
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - PoolingVolume
   - Player
   - Platform
-  - 
+  - EnemyAlien
   - 
   - 
   - 
